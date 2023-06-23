@@ -13,9 +13,6 @@ library(glue)
 # start front end
 ui <- shinyUI(
     fluidPage(
-        # tags$head(
-        #     tags$link(rel = "stylesheet", type = "text/css", href = "styling.css")
-        # ),
         tags$head(HTML("<title>Orte der Sozialdemokratie</title>"), tags$link(rel = "stylesheet", type = "text/css", href = "styling.css")),
         leafletOutput("map", height = "100vh")
     )

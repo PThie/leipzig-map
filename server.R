@@ -15,9 +15,20 @@ server <- function(input, output) {
     )
 
     #--------------------------------------------------
+    # replace picture link with path if picture is privat
+
+    poi <- poi |>
+        mutate(
+            picture = case_when(
+                source_ind == "privat" ~ paste0(name, ".JPG"),
+                TRUE ~ picture
+            )
+        )
+
+    #--------------------------------------------------
     # define marker icons
     pointerIcon <- makeIcon(
-        iconUrl = "assets/pointer_large.png",
+        iconUrl = "pointer_large.png",
         iconWidth = 40,
         iconHeight = 40
     )
@@ -25,10 +36,10 @@ server <- function(input, output) {
     #--------------------------------------------------
     # define label text for pop-ups
     label_text <- glue(
-        "<h3 style = \"font-family:open sans;\"><b>{poi$name}</b></h3>",
-        "<p style = \"font-family:open sans;font-size:150%\" align = \"justify\">{poi$description}</p>",
+        "<h3 style = \"font-family:Calibri, sans-serif;\"><b>{poi$name}</b></h3>",
+        "<p style = \"font-family:Calibri, sans-serif;font-size:140%\">{poi$description}</p>",
         "<img src={poi$picture} width = 300px height = auto>",
-        "<p style = \"font-family:open sans;font-size:100%\">{poi$source}</p>"
+        "<p style = \"font-family:Calibri, sans-serif;font-size:100%\">{poi$source}</p>"
     )
 
     #--------------------------------------------------
