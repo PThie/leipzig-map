@@ -24,7 +24,7 @@ server <- function(input, output) {
                 TRUE ~ picture
             )
         )
-
+    
     #--------------------------------------------------
     # define marker icons
     pointerIcon <- makeIcon(
@@ -37,7 +37,7 @@ server <- function(input, output) {
     # define label text for pop-ups
     label_text <- glue(
         "<h3 style = \"font-family:Calibri, sans-serif;\"><b>{poi$name}</b></h3>",
-        "<p style = \"font-family:Calibri, sans-serif;font-size:140%\">{poi$description}</p>",
+        "<p style = \"font-family:Calibri, sans-serif; font-size:140%; overflow-y:scroll; height:100px\">{poi$description}</p>",
         "<img src={poi$picture} width = 300px height = auto>",
         "<p style = \"font-family:Calibri, sans-serif;font-size:100%\">{poi$source}</p>"
     )
@@ -48,9 +48,6 @@ server <- function(input, output) {
     output$map <- renderLeaflet({
         leaflet() |>
             addProviderTiles(
-                # providers$Esri.WorldGrayCanvas,
-                # providers$CartoDB.DarkMatterNoLabels,
-                # providers$Stamen.TonerLite,
                 providers$Esri.WorldTopoMap,
                 options = providerTileOptions(noWrap = TRUE)
             ) |>
