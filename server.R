@@ -18,8 +18,8 @@ server <- function(input, output) {
     # replace picture link with path if picture is privat
 
     poi <- poi |>
-        mutate(
-            picture = case_when(
+        dplyr::mutate(
+            picture = dplyr::case_when(
                 source_ind == "privat" ~ paste0(name, ".JPG"),
                 TRUE ~ picture
             )
